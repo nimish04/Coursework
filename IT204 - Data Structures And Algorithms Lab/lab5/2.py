@@ -38,13 +38,19 @@ class BinSearchTree:
 		if (x == None):
 			return None
 		else:
-			return self.minimum(x.left_child)
+			if x.left_child:
+				return self.minimum(x.left_child)
+			else:
+				return x.key
 
 	def maximum(self, x):
 		if (x == None):
 			return None
 		else:
-			return self.maximum(x.right_child)
+			if x.right_child:
+				return self.maximum(x.right_child)
+			else:
+				return x.key
 
 	def successor(self, x):
 		if (x.right_child != None):

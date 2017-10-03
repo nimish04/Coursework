@@ -36,13 +36,19 @@ class BinSearchTree:
 		if (x == None):
 			return None
 		else:
-			return self.minimum(x.left_child)
+			if x.left_child:
+				return self.minimum(x.left_child)
+			else:
+				return x.key
 
 	def maximum(self, x):
 		if (x == None):
 			return None
 		else:
-			return self.maximum(x.right_child)
+			if x.right_child:
+				return self.maximum(x.right_child)
+			else:
+				return x.key
 
 	def successor(self, x):
 		if (x.right_child != None):
@@ -120,13 +126,17 @@ def main():
 	B.insert(2, B.root)
 	print(B.root.right_child.right_child == None)
 	print(B.search(7, B.root).key)
-	B.preorder_traversal(B.root)
+	B.printPrefix()
+	print(B.minimum(B.root))
+	print(B.maximum(B.root))
 	C = BinSearchTree(1)
 	C.insert(2, C.root)
 	C.insert(3, C.root)
 	C.insert(4, C.root)
 	C.insert(5, C.root)
 	C.printPrefix()
+	print(C.minimum(C.root))
+	print(C.maximum(C.root))
 
 if __name__ == '__main__':
 	main()
