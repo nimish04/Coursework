@@ -27,10 +27,7 @@ elif [ $number -lt 1000 ]
 	then
 	lastDigit=$(echo "scale=0; $number / 100" | bc)
 	number=$(echo "scale=0; $number % 100" | bc)
-	if [ $number -lt 1 ]
-		then
-		:
-	elif [$number -lt 10 ]
+	if [[($number -lt 10) && ($number -gt 0)]]
 		then
 		string="${oneToTen[`expr $number - 1`]}"
 	elif [ $number -eq 10 ]
