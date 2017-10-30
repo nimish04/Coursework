@@ -67,7 +67,7 @@ def main():
 			break
 		else:
 			print("Wrong input!")
-	BFS(G, 2)
+	BFS(G, int(input("Enter source vertex: ")))
 	G.printMat()
 	print()
 	G.printList()
