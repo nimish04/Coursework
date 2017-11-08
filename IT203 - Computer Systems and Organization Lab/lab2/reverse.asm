@@ -2,7 +2,7 @@
 
 .data
 	string db "hello$"
-	reverse db "hello$"
+	reverse db ?
 	len dw 5
 
 .code
@@ -10,27 +10,23 @@
 	mov ds,ax
 
 	mov cx,len
-	mov bx,0
-	dec len
+	mov si,0
+	mov di,len
+	dec di
 
 	A:
-		mov si,len
-		sub si,bx
-		mov dl,string[si]
-		mov si,bx
+		mov dl,string[di]
 		mov reverse[si],dl
-		inc bx
+		inc si
+		dec di
 	loop A
 
-	inc len
-	mov si,len
-	mov dl,'$'
-	mov string[si],dl
-	
+	mov al,'$'
+	mov reverse[si],al
+
 	lea dx,reverse
 	mov ah,9h
 	int 21h
-
 
 	mov ah,4ch
 	int 21h
