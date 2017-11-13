@@ -75,11 +75,19 @@ class BinSearchTree:
 			else:
 				x.parent.right_child = None
 		elif (x.left_child != None):
-			x.key = x.left_child.key
-			x.left_child = None
+			if x.parent.left_child == x:
+				x.parent.left_child = x.left_child
+				x.left_child.parent = x.parent
+			else:
+				x.parent.right_child = x.left_child
+				x.left_child.parent = x.parent
 		elif (x.right_child != None):
-			x.key = x.right_child.key
-			x.right_child = None
+			if x.parent.left_child == x:
+				x.parent.left_child = x.right_child
+				x.right_child.parent = x.parent
+			else:
+				x.parent.right_child = x.right_child
+				x.right_child.parent = x.parent
 		else:
 			y = predecessor(x)
 			x.key = y.key
@@ -98,10 +106,12 @@ class BinSearchTree:
 			self.postorder_traversal(x.left_child)
 
 	def printPostfix(self):
+		self.postorder = []
 		self.postorder_traversal(self.root)
 		print(self.postorder)
 
 	def printPrefix(self):
+		self.preorder = []
 		self.preorder_traversal(self.root)
 		print(self.preorder)
 
@@ -114,11 +124,17 @@ class BinTreeNode:
 		self.key = k
 
 def main():
-	B = BinSearchTree(5)
+	B = BinSearchTree(6)
 	B.insert(3, B.root)
+	B.insert(4, B.root)
+	B.insert(5, B.root)
 	B.insert(8, B.root)
 	B.insert(12, B.root)
 	B.insert(7, B.root)
+	B.printPrefix()
+	B.delete(B.root.left_child)
+	print(B.root.left_child.right_child.key)
+	B.printPrefix()
 	print(B.root.right_child.right_child.key)
 	print(B.successor(B.root.right_child.left_child).key)
 	print(B.successor(B.root.right_child.left_child).key)

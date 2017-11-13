@@ -77,11 +77,19 @@ class BinSearchTree:
 			else:
 				x.parent.right_child = None
 		elif (x.left_child != None):
-			x.key = x.left_child.key
-			x.left_child = None
+			if x.parent.left_child == x:
+				x.parent.left_child = x.left_child
+				x.left_child.parent = x.parent
+			else:
+				x.parent.right_child = x.left_child
+				x.left_child.parent = x.parent
 		elif (x.right_child != None):
-			x.key = x.right_child.key
-			x.right_child = None
+			if x.parent.left_child == x:
+				x.parent.left_child = x.right_child
+				x.right_child.parent = x.parent
+			else:
+				x.parent.right_child = x.right_child
+				x.right_child.parent = x.parent
 		else:
 			y = predecessor(x)
 			x.key = y.key
